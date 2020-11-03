@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, TextField, Button, Typography } from "@material-ui/core";
+import { msgConfig } from "../service";
 class FormGenerator extends Component {
   constructor(props) {
     super(props);
@@ -69,11 +70,20 @@ class FormGenerator extends Component {
     }
     this.setState({ formObj: tempState });
   };
+  resetFormError = () => {
+    if (this.state.formError) {
+      this.setState({ formError: false });
+    }
+  };
   render() {
     const { formObj, formError } = this.state;
 
     return (
-      <form style={this.styles.loginForm} onSubmit={e => this.onSubmit(e)}>
+      <form
+        style={this.styles.loginForm}
+        onSubmit={e => this.onSubmit(e)}
+        noValidate
+      >
         <Grid
           item
           container
@@ -96,13 +106,14 @@ class FormGenerator extends Component {
                   this.changeVal(e, field.field);
                 }}
                 onBlur={e => this.checkEmpty(field)}
+                onFocus={this.resetFormError}
               />
             </Grid>
           ))}
           {formError && (
             <Grid item>
               <Typography className='err'>
-                Please check the form for errors
+                {msgConfig.errors.clientErrors.formErr001}
               </Typography>
             </Grid>
           )}
