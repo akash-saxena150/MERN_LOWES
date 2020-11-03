@@ -31,7 +31,9 @@ class AdminDashboard extends Component {
               alignItems='center'
               className='block'
             >
-              <Typography variant='subtitle1'>Users</Typography>
+              <Typography variant='h2' color='secondary'>
+                Users
+              </Typography>
             </Grid>
           </Grid>
           <Grid justify='center' alignItems='center' item xs={6}>
@@ -41,7 +43,9 @@ class AdminDashboard extends Component {
               alignItems='center'
               className='block'
             >
-              <Typography variant='subtitle1'>Domains</Typography>
+              <Typography variant='h2' color='secondary'>
+                Domains
+              </Typography>
             </Grid>
           </Grid>
           <Grid justify='center' alignItems='center' item xs={6}>
@@ -51,7 +55,9 @@ class AdminDashboard extends Component {
               alignItems='center'
               className='block'
             >
-              <Typography variant='subtitle1'>Modules</Typography>
+              <Typography variant='h2' color='secondary'>
+                Modules
+              </Typography>
             </Grid>
           </Grid>
           <Grid justify='center' alignItems='center' item xs={6}>
@@ -61,7 +67,9 @@ class AdminDashboard extends Component {
               alignItems='center'
               className='block'
             >
-              <Typography variant='subtitle1'>Graphs</Typography>
+              <Typography variant='h2' color='secondary'>
+                Graphs
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
