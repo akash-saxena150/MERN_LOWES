@@ -1,0 +1,84 @@
+{
+  "users": {
+    "01": {
+      "fName": "Mohit",
+      "lName": "Saran",
+      "email": "mohit@gmail.com",
+      "password": "12345",
+      "phone": 9999999999,
+      "winId": "01",
+      "role_id": "001"
+    },
+    "02": {
+      "fName": "Nidhi",
+      "lName": "Shree",
+      "email": "nidhi@gmail.com",
+      "password": "12345",
+      "phone": 9999999999,
+      "winId": "02",
+      "role_id": "002"
+    },
+    "03": {
+      "fName": "Shantanu",
+      "lName": "Panda",
+      "email": "shantanu@gmail.com",
+      "password": "12345",
+      "phone": 9999999999,
+      "winId": "03",
+      "role_id": "004",
+      "isAdmin": true
+    },
+    "04": {
+      "fName": "Shahid",
+      "lName": "Alexander",
+      "email": "shahid@gmail.com",
+      "password": "12345",
+      "phone": 9999999999,
+      "winId": "04",
+      "role_id": "004",
+      "isAdmin": true
+    }
+  },
+  "roles": {
+    "001": { "name": "Director" },
+    "002": { "name": "VP" },
+    "003": { "name": "Manager" },
+    "004": { "name": "Employee" }
+  },
+  "permissions": {
+    "01": {
+      "winId": "01",
+      "domains": []
+    },
+    "02": {
+      "winId": "04",
+      "domains": []
+    }
+  },
+  "domains": {
+    "01": {
+      "name": "IAM"
+    },
+    "02": {
+      "Name": "SOC"
+    }
+  },
+  "modules": {
+    "01": {
+      "name": "Monitoring",
+      "domain_id": "01"
+    },
+    "02": {
+      "Name": "IAM ops",
+      "domain_id": "01"
+    },
+    "03": {
+      "Name": "SOC Incidence",
+      "domain_id": "02"
+    },
+    "04": {
+      "Name": "SOC Monitoring",
+      "domain_id": "02"
+    }
+  }
+}
