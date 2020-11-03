@@ -7,7 +7,7 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route path='/admindashboard' component={AdminDashboard} />
+        <Route path='/admindashboard/:id' component={AdminDashboard} />
         <Route path='/userdashboard' component={UserDashboard} />
         <Route path='/login' component={Login} />
         <Route path='/' component={Login} />

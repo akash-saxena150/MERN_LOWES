@@ -2,15 +2,23 @@ import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import Styles from "./Login-style";
 import FormGenerator from "../../Component/FormGenerator";
-import { formData } from "../../service";
+import { formData, login } from "../../service";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.props = props;
     this.state = { loginCreds: formData.loginCreds };
   }
   onLogin = data => {
-    console.log("Login data", data);
+    const loginInfo = login({
+      username: data[0].value,
+      password: data[1].value
+    });
+    console.log(loginInfo);
+    if (!loginInfo.error) {
+      this.props.history.push(`/admindashboard/${loginInfo.winId}`);
+    }
   };
   render() {
     const { loginCreds } = this.state;

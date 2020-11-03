@@ -7,14 +7,29 @@ import {
   IconButton,
   Typography
 } from "@material-ui/core";
-import { colors } from "../../service.js";
+import { colors, getUserDetails } from "../../service.js";
 class AdminDashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = { userDetails: {} };
+  }
+  componentDidMount() {
+    console.log(this.props);
+    const userDetails = getUserDetails(this.props.match.params.id);
+    this.setState({ userDetails: userDetails });
+  }
   render() {
+    const { userDetails } = this.state;
     return (
       <>
         <AppBar position='static'>
           <Toolbar>
-            <IconButton color='inherit'>A</IconButton>
+            {userDetails && userDetails.fName && (
+              <IconButton color='inherit'>
+                {userDetails.fName.substring(0, 1)}
+              </IconButton>
+            )}
           </Toolbar>
         </AppBar>
         <Grid
