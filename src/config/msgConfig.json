@@ -1,0 +1,10 @@
+{
+  "errors": {
+    "clientErrors": {
+      "formErr001": "Please check the form for errors"
+    },
+    "serverErrors": {}
+  },
+  "success": {},
+  "info": {}
+}

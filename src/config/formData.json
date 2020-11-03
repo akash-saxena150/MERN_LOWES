@@ -1,0 +1,24 @@
+{
+  "loginCreds": [
+    {
+      "field": "userName",
+      "type": "email",
+      "displayName": "User name",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid email"
+    },
+    {
+      "field": "password",
+      "type": "password",
+      "displayName": "Password",
+      "value": "",
+      "err": false,
+      "required": true,
+      "minLen": 5,
+      "maxLen": 10,
+      "errMsg": "This field is mandatory"
+    }
+  ]
+}
