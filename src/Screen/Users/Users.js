@@ -10,7 +10,8 @@ import {
   Avatar,
   Typography
 } from "@material-ui/core";
-import { getUsers, getInitials, getUserDetails } from "../../service";
+import { getUsers, getInitials, getUserDetails, colors } from "../../service";
+import { Link } from "react-router-dom";
 class Users extends Component {
   constructor(props) {
     super(props);
@@ -47,10 +48,19 @@ class Users extends Component {
                 {Object.keys(users).map((key, indx) => (
                   <ListItem
                     key={`${users[key].fName}-${indx}`}
-                    style={{
-                      ...Styles.listItem,
-                      ...{ border: "1px solid red" }
-                    }}
+                    style={
+                      !(key === this.props.match.params.id)
+                        ? {
+                            ...Styles.listItem
+                          }
+                        : {
+                            ...Styles.listItem,
+                            ...{
+                              background: colors.secondary,
+                              color: colors.white
+                            }
+                          }
+                    }
                     onClick={e => this.loadUser(users[key]["winId"])}
                   >
                     <ListItemAvatar>
@@ -82,9 +92,11 @@ class Users extends Component {
                         {userDetails.role}
                       </Typography>
                     </Grid>
-                    <Grid item>
+                  </Grid>
+                  <Grid item>
+                    <Link to={`/createuser/${userDetails.winId}`}>
                       <span className='material-icons'>create</span>
-                    </Grid>
+                    </Link>
                   </Grid>
                 </Grid>
                 <Grid item style={Styles.info}>

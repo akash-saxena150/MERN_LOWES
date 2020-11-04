@@ -20,5 +20,79 @@
       "maxLen": 10,
       "errMsg": "This field is mandatory"
     }
+  ],
+  "createUser": [
+    {
+      "field": "fName",
+      "type": "text",
+      "displayName": "First Name",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid first name"
+    },
+    {
+      "field": "lName",
+      "type": "text",
+      "displayName": "Last Name",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid last name"
+    },
+    {
+      "field": "email",
+      "type": "email",
+      "displayName": "Email",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid email"
+    },
+    {
+      "field": "password",
+      "type": "password",
+      "displayName": "Password",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid password"
+    },
+    {
+      "field": "phone",
+      "type": "number",
+      "displayName": "Phone",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid phone number"
+    },
+    {
+      "field": "winId",
+      "type": "text",
+      "displayName": "Windows Id",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a valid windows id"
+    },
+    {
+      "field": "role_id",
+      "type": "text",
+      "displayName": "Role id",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Enter a role id"
+    },
+    {
+      "field": "isAdmin",
+      "type": "text",
+      "displayName": "Is the user an admin?",
+      "value": "",
+      "err": false,
+      "required": true,
+      "errMsg": "Please answer in true or false"
+    }
   ]
 }

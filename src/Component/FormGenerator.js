@@ -77,6 +77,7 @@ class FormGenerator extends Component {
   };
   render() {
     const { formObj, formError } = this.state;
+    const { buttonName } = this.props;
 
     return (
       <form
@@ -99,6 +100,7 @@ class FormGenerator extends Component {
                 error={field.err}
                 type={field.type}
                 id={field.field}
+                value={field.value}
                 label={`${field.displayName}${field.required ? "*" : ""}`}
                 variant='outlined'
                 helperText={field.err ? field.errMsg : ""}
@@ -119,7 +121,7 @@ class FormGenerator extends Component {
           )}
           <Grid item>
             <Button type='submit' variant='contained' color='primary'>
-              Login
+              {buttonName || "Login"}
             </Button>
           </Grid>
         </Grid>
