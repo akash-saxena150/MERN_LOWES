@@ -19,10 +19,21 @@ class Users extends Component {
   componentDidMount() {
     const users = getUsers();
     this.setState({ users });
+    this.loadUserDetails();
+  }
+  loadUserDetails() {
+    let userDetails = this.props.match.params.id
+      ? getUserDetails(this.props.match.params.id)
+      : null;
+    this.setState({ userDetails });
+  }
+  componentDidUpdate(prevProps) {
+    if (!(prevProps === this.props)) {
+      this.loadUserDetails();
+    }
   }
   loadUser = wid => {
-    console.log(getUserDetails(wid));
-    this.setState({ userDetails: getUserDetails(wid) });
+    this.props.history.push(wid);
   };
   render() {
     const { users, userDetails } = this.state;
@@ -36,7 +47,10 @@ class Users extends Component {
                 {Object.keys(users).map((key, indx) => (
                   <ListItem
                     key={`${users[key].fName}-${indx}`}
-                    style={Styles.listItem}
+                    style={{
+                      ...Styles.listItem,
+                      ...{ border: "1px solid red" }
+                    }}
                     onClick={e => this.loadUser(users[key]["winId"])}
                   >
                     <ListItemAvatar>
@@ -67,6 +81,9 @@ class Users extends Component {
                       <Typography variant='subtitle1' style={Styles.role}>
                         {userDetails.role}
                       </Typography>
+                    </Grid>
+                    <Grid item>
+                      <span className='material-icons'>create</span>
                     </Grid>
                   </Grid>
                 </Grid>

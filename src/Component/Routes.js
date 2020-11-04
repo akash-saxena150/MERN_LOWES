@@ -11,7 +11,7 @@ class Routes extends Component {
         <Route path='/admindashboard/:id' component={AdminDashboard} />
         <Route path='/userdashboard' component={UserDashboard} />
         <Route path='/login' component={Login} />
-        <Route path='/users' component={Users} />
+        <Route path='/users/:id?' component={Users} />
         <Route path='/' component={Login} />
       </Switch>
     );
