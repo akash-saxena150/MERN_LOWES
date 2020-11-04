@@ -7,6 +7,7 @@ import {
   IconButton,
   Typography
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { colors, getUserDetails } from "../../service.js";
 class AdminDashboard extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class AdminDashboard extends Component {
               className='block'
             >
               <Typography variant='h2' color='secondary'>
-                Users
+                <Link to='/users'>Users</Link>
               </Typography>
             </Grid>
           </Grid>
