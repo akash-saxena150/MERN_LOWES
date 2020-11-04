@@ -13,7 +13,9 @@ class CreateUser extends Component {
     console.log(data);
   };
   componentDidMount() {
-    const createUserForm = formData.createUser;
+    console.log("Component mounted");
+    const tempFormData = { ...formData };
+    const createUserForm = [...tempFormData.createUser];
     this.setState({ createUserForm });
     const userData = this.loadUserDetails();
     if (userData) {

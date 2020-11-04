@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Grid, TextField, Button, Typography } from "@material-ui/core";
 import { msgConfig } from "../service";
+import RenderCustomField from "./RenderCustomField";
 class FormGenerator extends Component {
   constructor(props) {
     super(props);
-    this.state = { formObj: props.formObj, formError: false };
+    this.state = { formObj: [...props.formObj], formError: false };
   }
   styles = {
     loginForm: { width: "100%" }
@@ -16,10 +17,11 @@ class FormGenerator extends Component {
       }
     }
   }
-  changeVal = (e, key) => {
+  changeVal = (e, key, type) => {
     const tempState = [...this.state.formObj];
     const indx = this.getIndx(key, tempState);
-    tempState[indx].value = e.target.value;
+    tempState[indx].value =
+      type && type === "switch" ? e.target.checked : e.target.value;
     const tempErr = this.validateField(tempState[indx]);
     tempState[indx].err = tempErr;
     this.setState({ formObj: tempState });
@@ -30,7 +32,8 @@ class FormGenerator extends Component {
       if (field.err) {
         errCount++;
       }
-      if (field.required && !field.value.length > 0) errCount++;
+      if (field.required && !(field.value.length > 0 || field.value > 0))
+        errCount++;
     });
     if (errCount > 0) return true;
     return false;
@@ -96,19 +99,11 @@ class FormGenerator extends Component {
         >
           {formObj.map((field, i) => (
             <Grid item key={`${field.field}-${i}`}>
-              <TextField
-                error={field.err}
-                type={field.type}
-                id={field.field}
-                value={field.value}
-                label={`${field.displayName}${field.required ? "*" : ""}`}
-                variant='outlined'
-                helperText={field.err ? field.errMsg : ""}
-                onChange={e => {
-                  this.changeVal(e, field.field);
-                }}
-                onBlur={e => this.checkEmpty(field)}
-                onFocus={this.resetFormError}
+              <RenderCustomField
+                field={field}
+                changeVal={this.changeVal}
+                checkEmpty={this.checkEmpty}
+                resetFormError={this.resetFormError}
               />
             </Grid>
           ))}

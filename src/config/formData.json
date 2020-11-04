@@ -87,11 +87,11 @@
     },
     {
       "field": "isAdmin",
-      "type": "text",
+      "type": "switch",
       "displayName": "Is the user an admin?",
       "value": "",
       "err": false,
-      "required": true,
+      "required": false,
       "errMsg": "Please answer in true or false"
     }
   ]

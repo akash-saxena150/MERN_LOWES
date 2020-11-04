@@ -34,7 +34,7 @@ class Users extends Component {
     }
   }
   loadUser = wid => {
-    this.props.history.push(wid);
+    this.props.history.push(`/users/${wid}`);
   };
   render() {
     const { users, userDetails } = this.state;
