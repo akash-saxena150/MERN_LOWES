@@ -5,6 +5,9 @@ import DummyData from "./config/dummyData.json";
 const colors = { ...Styles.colors };
 const formData = { ...FormData };
 const msgConfig = { ...MsgConfig };
+const getInitials = str => {
+  return str.substring(0, 1);
+};
 const login = data => {
   for (let key in DummyData.users) {
     if (DummyData.users[key]["email"] === data.username)
@@ -17,6 +20,18 @@ const login = data => {
   return { error: "Invalid User" };
 };
 const getUserDetails = wid => {
-  return DummyData.users[wid];
+  let role_id = DummyData.users[wid].role_id;
+  return { ...DummyData.users[wid], role: DummyData.roles[role_id].name };
 };
-export { colors, formData, msgConfig, login, getUserDetails };
+const getUsers = () => {
+  return DummyData.users;
+};
+export {
+  colors,
+  formData,
+  msgConfig,
+  login,
+  getUserDetails,
+  getUsers,
+  getInitials
+};

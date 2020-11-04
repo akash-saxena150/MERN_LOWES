@@ -5,10 +5,12 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography
+  Typography,
+  Box
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { colors, getUserDetails } from "../../service.js";
+import Header from "../../Component/Header.js";
 class AdminDashboard extends Component {
   constructor(props) {
     super(props);
@@ -24,15 +26,7 @@ class AdminDashboard extends Component {
     const { userDetails } = this.state;
     return (
       <>
-        <AppBar position='static'>
-          <Toolbar>
-            {userDetails && userDetails.fName && (
-              <IconButton color='inherit'>
-                {userDetails.fName.substring(0, 1)}
-              </IconButton>
-            )}
-          </Toolbar>
-        </AppBar>
+        <Header fName={userDetails.fName} />
         <Grid
           container
           justify='center'
@@ -42,6 +36,7 @@ class AdminDashboard extends Component {
         >
           <Grid container justify='center' alignItems='center' item xs={6}>
             <Grid
+              item
               container
               justify='center'
               alignItems='center'
