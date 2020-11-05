@@ -32,8 +32,7 @@ class FormGenerator extends Component {
       if (field.err) {
         errCount++;
       }
-      if (field.required && !(field.value.length > 0 || field.value > 0))
-        errCount++;
+      if (field.required && !(field.value.toString().length > 0)) errCount++;
     });
     if (errCount > 0) return true;
     return false;

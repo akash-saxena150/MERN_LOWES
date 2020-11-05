@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Styles from "./CreateUser-style";
-import { formData, getUserDetails } from "../../service";
+import { formData, getUserDetails, fetchOptions } from "../../service";
 import Header from "../../Component/Header";
 import FormGenerator from "../../Component/FormGenerator";
 import { Grid, Typography } from "@material-ui/core";
@@ -13,9 +13,15 @@ class CreateUser extends Component {
     console.log(data);
   };
   componentDidMount() {
-    console.log("Component mounted");
-    const tempFormData = { ...formData };
-    const createUserForm = [...tempFormData.createUser];
+    const createUserForm = [...formData.createUser];
+    for (let key in createUserForm) {
+      if (createUserForm[key].type === "select") {
+        if (!createUserForm[key].options) {
+          let optionMap = fetchOptions(createUserForm[key].opRef);
+          createUserForm[key].options = optionMap;
+        }
+      }
+    }
     this.setState({ createUserForm });
     const userData = this.loadUserDetails();
     if (userData) {
@@ -26,6 +32,7 @@ class CreateUser extends Component {
     let tempFormArr = [...createUserForm];
     tempFormArr.map(formField => {
       formField.value = userData[formField.field] || false;
+      formField.err = false;
     });
     this.setState({ createUserForm: tempFormArr });
   };

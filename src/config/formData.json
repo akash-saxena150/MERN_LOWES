@@ -78,12 +78,13 @@
     },
     {
       "field": "role_id",
-      "type": "text",
-      "displayName": "Role id",
+      "type": "select",
+      "opRef": "roles",
+      "displayName": "Role",
       "value": "",
       "err": false,
       "required": true,
-      "errMsg": "Enter a role id"
+      "errMsg": "Enter a role"
     },
     {
       "field": "isAdmin",

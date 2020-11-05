@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { TextField, Switch, Typography } from "@material-ui/core";
+import {
+  TextField,
+  Switch,
+  Typography,
+  Select,
+  FormControl,
+  InputLabel
+} from "@material-ui/core";
 
 class RenderCustomField extends Component {
   render() {
@@ -42,6 +49,34 @@ class RenderCustomField extends Component {
               inputProps={{ "aria-label": "secondary checkbox" }}
             />
           </>
+        );
+        break;
+      case "select":
+        renderedEl = (
+          <FormControl variant='outlined' style={{ minWidth: "180px" }}>
+            <InputLabel htmlFor={`${field.field}`}>
+              {field.displayName}
+            </InputLabel>
+            <Select
+              native
+              value={field.value}
+              onChange={e => {
+                changeVal(e, field.field);
+              }}
+              label={field.displayName}
+              inputProps={{
+                name: field.field,
+                id: field.field
+              }}
+            >
+              <option aria-label='None' value='' />
+              {Object.keys(field.options).map((key, i) => (
+                <option value={key} key={`${key}-${i}-${field.field}`}>
+                  {field.options[key].name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
         );
     }
     return renderedEl;

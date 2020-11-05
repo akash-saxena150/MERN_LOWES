@@ -26,6 +26,9 @@ const getUserDetails = wid => {
 const getUsers = () => {
   return DummyData.users;
 };
+const fetchOptions = key => {
+  return DummyData[key];
+};
 export {
   colors,
   formData,
@@ -33,5 +36,6 @@ export {
   login,
   getUserDetails,
   getUsers,
-  getInitials
+  getInitials,
+  fetchOptions
 };
