@@ -47,7 +47,7 @@ class AdminDashboard extends Component {
               </Typography>
             </Grid>
           </Grid>
-          <Grid justify='center' alignItems='center' item xs={6}>
+          <Grid justify='center' alignItems='center' container item xs={6}>
             <Grid
               container
               justify='center'
@@ -59,8 +59,9 @@ class AdminDashboard extends Component {
               </Typography>
             </Grid>
           </Grid>
-          <Grid justify='center' alignItems='center' item xs={6}>
+          <Grid justify='center' alignItems='center' container item xs={6}>
             <Grid
+              item
               container
               justify='center'
               alignItems='center'
@@ -71,8 +72,9 @@ class AdminDashboard extends Component {
               </Typography>
             </Grid>
           </Grid>
-          <Grid justify='center' alignItems='center' item xs={6}>
+          <Grid justify='center' alignItems='center' container item xs={6}>
             <Grid
+              item
               container
               justify='center'
               alignItems='center'

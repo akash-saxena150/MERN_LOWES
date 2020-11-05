@@ -14,7 +14,8 @@ const login = data => {
       if (DummyData.users[key]["password"] === data.password)
         return {
           msg: "login successful",
-          winId: DummyData.users[key]["winId"]
+          winId: DummyData.users[key]["winId"],
+          isAdmin: DummyData.users[key]["isAdmin"]
         };
   }
   return { error: "Invalid User" };
@@ -29,6 +30,13 @@ const getUsers = () => {
 const fetchOptions = key => {
   return DummyData[key];
 };
+const set = (key, val) => {
+  val = JSON.stringify(val);
+  localStorage.setItem(key, val);
+};
+const get = key => {
+  return localStorage.getItem(key);
+};
 export {
   colors,
   formData,
@@ -37,5 +45,7 @@ export {
   getUserDetails,
   getUsers,
   getInitials,
-  fetchOptions
+  fetchOptions,
+  set,
+  get
 };
