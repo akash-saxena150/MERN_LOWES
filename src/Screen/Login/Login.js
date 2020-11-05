@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import Styles from "./Login-style";
 import FormGenerator from "../../Component/FormGenerator";
-import { formData, login, set } from "../../service";
+import { formData, login, set, KeyVars } from "../../service";
 
 class Login extends Component {
   constructor(props) {
@@ -17,9 +17,9 @@ class Login extends Component {
     });
     console.log(loginInfo);
     if (!loginInfo.error) {
-      set("loggedInUserWinId", loginInfo.winId);
-      set("loggedInUserIsAdmin", loginInfo.isAdmin);
-      this.props.history.push(`/admindashboard/${loginInfo.winId}`);
+      set(KeyVars.WINID, loginInfo.winId);
+      set(KeyVars.ISADMIN, loginInfo.isAdmin || false);
+      this.props.history.push(`/admindashboard`);
     }
   };
   render() {

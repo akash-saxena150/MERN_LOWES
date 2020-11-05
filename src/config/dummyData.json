@@ -48,7 +48,10 @@
   "permissions": {
     "01": {
       "winId": "01",
-      "domains": []
+      "domains": {
+        "01": ["01", "05"],
+        "02": ["03", "06"]
+      }
     },
     "02": {
       "winId": "04",
@@ -60,7 +63,7 @@
       "name": "IAM"
     },
     "02": {
-      "Name": "SOC"
+      "name": "SOC"
     }
   },
   "modules": {
@@ -69,15 +72,23 @@
       "domain_id": "01"
     },
     "02": {
-      "Name": "IAM ops",
+      "name": "IAM ops",
       "domain_id": "01"
     },
     "03": {
-      "Name": "SOC Incidence",
+      "name": "SOC Incidence",
       "domain_id": "02"
     },
     "04": {
-      "Name": "SOC Monitoring",
+      "name": "SOC Monitoring",
+      "domain_id": "02"
+    },
+    "05": {
+      "name": "IAM corporate",
+      "domain_id": "01"
+    },
+    "06": {
+      "name": "SOC Ops",
       "domain_id": "02"
     }
   }

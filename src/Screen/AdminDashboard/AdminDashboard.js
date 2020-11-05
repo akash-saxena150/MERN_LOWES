@@ -11,22 +11,11 @@ import {
 import { Link } from "react-router-dom";
 import { colors, getUserDetails } from "../../service.js";
 import Header from "../../Component/Header.js";
+import RestrictAdminAccess from "../../Component/RestrictAdminAccess.js";
 class AdminDashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.state = { userDetails: {} };
-  }
-  componentDidMount() {
-    console.log(this.props);
-    const userDetails = getUserDetails(this.props.match.params.id);
-    this.setState({ userDetails: userDetails });
-  }
   render() {
-    const { userDetails } = this.state;
     return (
       <>
-        <Header fName={userDetails.fName} />
         <Grid
           container
           justify='center'
@@ -90,4 +79,4 @@ class AdminDashboard extends Component {
     );
   }
 }
-export default AdminDashboard;
+export default RestrictAdminAccess(AdminDashboard);

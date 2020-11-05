@@ -1,0 +1,4 @@
+{
+  "ISADMIN": "loggedInUserIsAdmin",
+  "WINID": "loggedInUserWinId"
+}

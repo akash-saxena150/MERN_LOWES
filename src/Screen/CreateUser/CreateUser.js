@@ -4,6 +4,7 @@ import { formData, getUserDetails, fetchOptions } from "../../service";
 import Header from "../../Component/Header";
 import FormGenerator from "../../Component/FormGenerator";
 import { Grid, Typography } from "@material-ui/core";
+import RestrictAdminAccess from "../../Component/RestrictAdminAccess";
 class CreateUser extends Component {
   constructor() {
     super();
@@ -46,7 +47,6 @@ class CreateUser extends Component {
     const { createUserForm } = this.state;
     return (
       <>
-        <Header />
         <Grid
           container
           direction='column'
@@ -71,4 +71,4 @@ class CreateUser extends Component {
     );
   }
 }
-export default CreateUser;
+export default RestrictAdminAccess(CreateUser);

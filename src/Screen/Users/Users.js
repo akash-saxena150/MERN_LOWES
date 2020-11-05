@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { getUsers, getInitials, getUserDetails, colors } from "../../service";
 import { Link } from "react-router-dom";
+import RestrictAdminAccess from "../../Component/RestrictAdminAccess";
 class Users extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +41,6 @@ class Users extends Component {
     const { users, userDetails } = this.state;
     return (
       <>
-        <Header />
         <Grid container style={Styles.container} justify='space-evenly'>
           <Grid item xs={3}>
             {users && (
@@ -119,4 +119,4 @@ class Users extends Component {
     );
   }
 }
-export default Users;
+export default RestrictAdminAccess(Users);
