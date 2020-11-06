@@ -9,6 +9,7 @@ import {
   Paper
 } from "@material-ui/core";
 import Styles from "./UserDashboard-style";
+import RestrictUserAccess from "../../Component/ResctrictUserAccess";
 class UserDashboard extends Component {
   constructor() {
     super();
@@ -59,4 +60,4 @@ class UserDashboard extends Component {
     );
   }
 }
-export default UserDashboard;
+export default RestrictUserAccess(UserDashboard);

@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 import Styles from "./Login-style";
 import FormGenerator from "../../Component/FormGenerator";
 import { formData, login, set, KeyVars } from "../../service";
+import IsUserLoggedin from "../../Component/IsUserLoggedin";
 
 class Login extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ class Login extends Component {
     if (!loginInfo.error) {
       set(KeyVars.WINID, loginInfo.winId);
       set(KeyVars.ISADMIN, loginInfo.isAdmin || false);
-      this.props.history.push(`/admindashboard`);
+      this.props.history.push(
+        loginInfo.isAdmin ? `/admindashboard` : "/userdashboard"
+      );
     }
   };
   render() {
@@ -38,4 +41,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default IsUserLoggedin(Login);

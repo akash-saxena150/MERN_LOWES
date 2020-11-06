@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { get, KeyVars } from "../service";
-function RestrictAdminAccess(WrappedComponent) {
+function RestrictUserAccess(WrappedComponent) {
   return class extends Component {
     constructor(props) {
       super(props);
@@ -9,8 +9,7 @@ function RestrictAdminAccess(WrappedComponent) {
     }
     componentDidMount() {
       let winId = get(KeyVars.WINID);
-      let adminAccess = get(KeyVars.ISADMIN) === "true" ? true : false;
-      if (winId && adminAccess) {
+      if (winId) {
         this.setState({ restrictRoute: false });
       }
     }
@@ -26,4 +25,4 @@ function RestrictAdminAccess(WrappedComponent) {
     }
   };
 }
-export default RestrictAdminAccess;
+export default RestrictUserAccess;
