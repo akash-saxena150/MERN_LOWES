@@ -10,7 +10,13 @@ import {
   Avatar,
   Typography
 } from "@material-ui/core";
-import { getUsers, getInitials, getUserDetails, colors } from "../../service";
+import {
+  getUsers,
+  getInitials,
+  getUserDetails,
+  colors,
+  callAPI
+} from "../../service";
 import { Link } from "react-router-dom";
 import RestrictAdminAccess from "../../Component/RestrictAdminAccess";
 class Users extends Component {
@@ -18,16 +24,32 @@ class Users extends Component {
     super(props);
     this.state = { user: {} };
   }
-  componentDidMount() {
-    const users = getUsers();
-    this.setState({ users });
+  onFetchUsers = data => {
+    this.setState({ users: data.data.userData });
     this.loadUserDetails();
+  };
+  onErrUsers = err => {
+    console.log(err);
+  };
+  componentDidMount() {
+    callAPI("users", "get", this.onFetchUsers, this.onErrUsers);
+
+    // this.loadUserDetails();
   }
+  onUserLoaded = data => {
+    this.setState({ userDetails: data.data.userData });
+  };
+  onUserErr = err => {
+    console.log(err);
+  };
   loadUserDetails() {
-    let userDetails = this.props.match.params.id
-      ? getUserDetails(this.props.match.params.id)
-      : null;
-    this.setState({ userDetails });
+    console.log("History", this.props);
+    callAPI(
+      `user/${this.props.match.params.id}`,
+      "get",
+      this.onUserLoaded,
+      this.onUserErr
+    );
   }
   componentDidUpdate(prevProps) {
     if (!(prevProps === this.props)) {
@@ -61,7 +83,7 @@ class Users extends Component {
                             }
                           }
                     }
-                    onClick={e => this.loadUser(users[key]["winId"])}
+                    onClick={e => this.loadUser(users[key]["win_id"])}
                   >
                     <ListItemAvatar>
                       <Avatar>{getInitials(users[key].fName)}</Avatar>

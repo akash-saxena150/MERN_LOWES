@@ -8,7 +8,7 @@ const colors = { ...Styles.colors };
 const formData = { ...FormData };
 const msgConfig = { ...MsgConfig };
 const getInitials = str => {
-  return str.substring(0, 1);
+  return str ? str.substring(0, 1) : "";
 };
 const login = data => {
   for (let key in DummyData.users) {
