@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { get, KeyVars } from "../service";
+import { get, set, KeyVars, callAPI } from "../service";
 function RestrictUserAccess(WrappedComponent) {
   return class extends Component {
     constructor(props) {
@@ -7,11 +7,23 @@ function RestrictUserAccess(WrappedComponent) {
       this.props = props;
       this.state = { restrictRoute: true };
     }
-    componentDidMount() {
-      let winId = get(KeyVars.WINID);
-      if (winId) {
+    authSuccess = data => {
+      let adminAccess = data.data.is_admin;
+      if (!adminAccess && data.data.win_id) {
+        set(KeyVars.FNAME, data.data.fName);
+        set(KeyVars.ISADMIN, false);
         this.setState({ restrictRoute: false });
       }
+    };
+    autherr = err => {
+      console.log(err);
+    };
+    componentDidMount() {
+      // let winId = get(KeyVars.WINID);
+      // if (winId) {
+      //   this.setState({ restrictRoute: false });
+      // }
+      callAPI("auth", "get", this.authSuccess, this.authErr);
     }
     render() {
       return (

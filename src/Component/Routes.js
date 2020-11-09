@@ -8,6 +8,7 @@ import CreateUser from "../Screen/CreateUser/CreateUser";
 import HOC from "../Screen/HOC/hoc";
 import hoc_child from "../Screen/HOC/hoc_child";
 import Header from "./Header";
+import Domains from "../Screen/Domains/Domains";
 class Routes extends Component {
   render() {
     return (
@@ -16,6 +17,7 @@ class Routes extends Component {
         <Switch>
           <Route path='/admindashboard' component={AdminDashboard} />
           <Route path='/userdashboard' component={UserDashboard} />
+          <Route path='/domains' component={Domains} />
           <Route path='/login' component={Login} />
           <Route path='/users/:id?' component={Users} />
           <Route path='/createuser/:id?' component={CreateUser} />
