@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import Styles from "./Login-style";
 import FormGenerator from "../../Component/FormGenerator";
-import { formData, login, set, KeyVars } from "../../service";
+import { formData, login, set, KeyVars, callAPI } from "../../service";
 import IsUserLoggedin from "../../Component/IsUserLoggedin";
 
 class Login extends Component {
@@ -11,19 +11,21 @@ class Login extends Component {
     this.props = props;
     this.state = { loginCreds: formData.loginCreds };
   }
+  loginSuccess = data => {
+    console.log("Login data", data);
+    set("auth", data.data.token);
+    this.props.history.push(
+      data.data.isAdmin ? `/admindashboard` : "/userdashboard"
+    );
+  };
+  errLogging = err => {
+    console.log(err);
+  };
   onLogin = data => {
-    const loginInfo = login({
-      username: data[0].value,
+    callAPI("auth", "post", this.loginSuccess, this.errLogging, {
+      email: data[0].value,
       password: data[1].value
     });
-    console.log(loginInfo);
-    if (!loginInfo.error) {
-      set(KeyVars.WINID, loginInfo.winId);
-      set(KeyVars.ISADMIN, loginInfo.isAdmin || false);
-      this.props.history.push(
-        loginInfo.isAdmin ? `/admindashboard` : "/userdashboard"
-      );
-    }
   };
   render() {
     const { loginCreds } = this.state;

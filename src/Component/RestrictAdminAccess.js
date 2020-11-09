@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { get, KeyVars } from "../service";
+import { get, KeyVars, callAPI, set } from "../service";
 function RestrictAdminAccess(WrappedComponent) {
   return class extends Component {
     constructor(props) {
@@ -7,12 +7,20 @@ function RestrictAdminAccess(WrappedComponent) {
       this.props = props;
       this.state = { restrictRoute: true };
     }
-    componentDidMount() {
-      let winId = get(KeyVars.WINID);
-      let adminAccess = get(KeyVars.ISADMIN) === "true" ? true : false;
-      if (winId && adminAccess) {
+    authSuccess = data => {
+      console.log("Auth success", data.data);
+      let adminAccess = data.data.is_admin;
+      console.log("Admin access", adminAccess);
+      if (adminAccess) {
+        set("userFName", data.data.fName);
         this.setState({ restrictRoute: false });
       }
+    };
+    autherr = err => {
+      console.log(err);
+    };
+    componentDidMount() {
+      callAPI("auth", "get", this.authSuccess, this.authErr);
     }
     render() {
       return (

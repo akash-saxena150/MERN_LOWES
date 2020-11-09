@@ -3,6 +3,7 @@ import FormData from "./config/formData.json";
 import MsgConfig from "./config/msgConfig.json";
 import DummyData from "./config/dummyData.json";
 import KeyVars from "./config/keyVars.json";
+import axios from "axios";
 const colors = { ...Styles.colors };
 const formData = { ...FormData };
 const msgConfig = { ...MsgConfig };
@@ -65,6 +66,36 @@ const fetchUserDomains = wid => {
   }
   return returnDomainData || {};
 };
+
+function callAPI(name, type, scb, ecb, reqBody) {
+  let url = `http://localhost:5000/api/${name}`;
+  if (get("auth")) {
+    axios.interceptors.request.use(function(config) {
+      // const token = store.getState().session.token;
+      config.headers["x-auth-token"] = get("auth");
+      return config;
+    });
+  }
+
+  switch (type) {
+    case "post":
+      axios
+        .post(url, reqBody)
+        .then(data => scb(data))
+        .catch(err => {
+          ecb(err);
+        });
+      break;
+    case "get":
+      axios
+        .get(url)
+        .then(data => scb(data))
+        .catch(err => {
+          ecb(err);
+        });
+      break;
+  }
+}
 export {
   colors,
   formData,
@@ -78,5 +109,6 @@ export {
   get,
   remove,
   KeyVars,
-  fetchUserDomains
+  fetchUserDomains,
+  callAPI
 };

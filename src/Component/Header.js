@@ -22,10 +22,8 @@ class Header extends Component {
     return false;
   }
   updateUserDetails() {
-    const userDetails = get(KeyVars.WINID)
-      ? getUserDetails(get(KeyVars.WINID))
-      : null;
-    if (userDetails) this.setState({ fName: userDetails.fName });
+    const userDetails = get(KeyVars.FNAME);
+    if (userDetails) this.setState({ fName: userDetails });
   }
   logout = () => {
     remove(KeyVars.WINID);
