@@ -79,7 +79,7 @@ class FormGenerator extends Component {
   };
   render() {
     const { formObj, formError } = this.state;
-    const { buttonName } = this.props;
+    const { buttonName, disablePass } = this.props;
 
     return (
       <form
@@ -103,6 +103,7 @@ class FormGenerator extends Component {
                 changeVal={this.changeVal}
                 checkEmpty={this.checkEmpty}
                 resetFormError={this.resetFormError}
+                disablePass={disablePass}
               />
             </Grid>
           ))}

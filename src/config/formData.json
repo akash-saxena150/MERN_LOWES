@@ -55,7 +55,7 @@
       "displayName": "Password",
       "value": "",
       "err": false,
-      "required": true,
+      "required": false,
       "errMsg": "Enter a valid password"
     },
     {
@@ -68,7 +68,7 @@
       "errMsg": "Enter a valid phone number"
     },
     {
-      "field": "winId",
+      "field": "win_id",
       "type": "text",
       "displayName": "Windows Id",
       "value": "",

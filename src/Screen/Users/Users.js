@@ -116,7 +116,7 @@ class Users extends Component {
                     </Grid>
                   </Grid>
                   <Grid item>
-                    <Link to={`/createuser/${userDetails.winId}`}>
+                    <Link to={`/createuser/${userDetails.win_id}`}>
                       <span className='material-icons'>create</span>
                     </Link>
                   </Grid>

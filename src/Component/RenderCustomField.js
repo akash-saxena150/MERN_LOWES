@@ -10,7 +10,13 @@ import {
 
 class RenderCustomField extends Component {
   render() {
-    const { changeVal, checkEmpty, resetFormError, field } = this.props;
+    const {
+      changeVal,
+      checkEmpty,
+      resetFormError,
+      field,
+      disablePass
+    } = this.props;
     let renderedEl = null;
     switch (field.type) {
       case "text":
@@ -23,6 +29,7 @@ class RenderCustomField extends Component {
             type={field.type}
             id={field.field}
             value={field.value}
+            disabled={field.type === "password" && disablePass}
             label={`${field.displayName}${field.required ? "*" : ""}`}
             variant='outlined'
             helperText={field.err ? field.errMsg : ""}

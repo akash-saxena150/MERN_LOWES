@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Styles from "./CreateUser-style";
-import { formData, getUserDetails, fetchOptions } from "../../service";
+import { formData, getUserDetails, fetchOptions, callAPI } from "../../service";
 import Header from "../../Component/Header";
 import FormGenerator from "../../Component/FormGenerator";
 import { Grid, Typography } from "@material-ui/core";
@@ -10,8 +10,25 @@ class CreateUser extends Component {
     super();
     this.state = {};
   }
+  onUserCreated = data => {
+    console.log("User created", data);
+    alert("Usesr created");
+  };
+  onUserCreationErr = err => {
+    console.log(err);
+  };
   onCreateUser = data => {
-    console.log(data);
+    let reqBody = {};
+    for (let i = 0; data[i]; i++) {
+      reqBody[data[i].field] = data[i].value;
+    }
+    callAPI(
+      "users",
+      "post",
+      this.onUserCreated,
+      this.onUserCreationErr,
+      reqBody
+    );
   };
   componentDidMount() {
     const createUserForm = [...formData.createUser];
@@ -24,10 +41,7 @@ class CreateUser extends Component {
       }
     }
     this.setState({ createUserForm });
-    const userData = this.loadUserDetails();
-    if (userData) {
-      this.mapUserDataToForm(userData, createUserForm);
-    }
+    this.loadUserDetails(createUserForm);
   }
   mapUserDataToForm = (userData, createUserForm) => {
     let tempFormArr = [...createUserForm];
@@ -37,11 +51,21 @@ class CreateUser extends Component {
     });
     this.setState({ createUserForm: tempFormArr });
   };
-  loadUserDetails() {
-    let userDetails = this.props.match.params.id
-      ? getUserDetails(this.props.match.params.id)
-      : null;
-    return userDetails;
+  onUserLoaded = (createUserForm, data) => {
+    if (data.data.userData) {
+      this.mapUserDataToForm(data.data.userData, createUserForm);
+    }
+  };
+  onUserErr = err => {
+    console.log(err);
+  };
+  loadUserDetails(createUserForm) {
+    callAPI(
+      `user/${this.props.match.params.id}`,
+      "get",
+      data => this.onUserLoaded(createUserForm, data),
+      this.onUserErr
+    );
   }
   render() {
     const { createUserForm } = this.state;
@@ -63,6 +87,7 @@ class CreateUser extends Component {
                 formObj={createUserForm}
                 formSubmit={this.onCreateUser}
                 buttonName='Save'
+                disablePass={true}
               />
             )}
           </Grid>
