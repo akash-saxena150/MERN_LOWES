@@ -8,11 +8,10 @@ function RestrictAdminAccess(WrappedComponent) {
       this.state = { restrictRoute: true };
     }
     authSuccess = data => {
-      console.log("Auth success", data.data);
       let adminAccess = data.data.is_admin;
-      console.log("Admin access", adminAccess);
       if (adminAccess) {
-        set("userFName", data.data.fName);
+        set(KeyVars.FNAME, data.data.fName);
+        set(KeyVars.ISADMIN, true);
         this.setState({ restrictRoute: false });
       }
     };
