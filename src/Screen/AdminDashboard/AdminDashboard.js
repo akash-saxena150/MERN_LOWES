@@ -44,7 +44,7 @@ class AdminDashboard extends Component {
               className='block'
             >
               <Typography variant='h2' color='secondary'>
-                Domains
+                <Link to='/domains'>Domains</Link>
               </Typography>
             </Grid>
           </Grid>

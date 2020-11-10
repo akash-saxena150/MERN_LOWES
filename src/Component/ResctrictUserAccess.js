@@ -15,7 +15,7 @@ function RestrictUserAccess(WrappedComponent) {
         this.setState({ restrictRoute: false });
       }
     };
-    autherr = err => {
+    authErr = err => {
       console.log(err);
     };
     componentDidMount() {

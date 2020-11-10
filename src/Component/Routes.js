@@ -9,6 +9,7 @@ import HOC from "../Screen/HOC/hoc";
 import hoc_child from "../Screen/HOC/hoc_child";
 import Header from "./Header";
 import Domains from "../Screen/Domains/Domains";
+import ChartBuilder from "../Screen/ChartBuilder/ChartBuilder";
 class Routes extends Component {
   render() {
     return (
@@ -16,6 +17,7 @@ class Routes extends Component {
         <Route path='/' component={Header} />
         <Switch>
           <Route path='/admindashboard' component={AdminDashboard} />
+          <Route path='/chartbuilder' component={ChartBuilder} />
           <Route path='/userdashboard' component={UserDashboard} />
           <Route path='/domains' component={Domains} />
           <Route path='/login' component={Login} />

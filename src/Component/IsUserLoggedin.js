@@ -7,10 +7,11 @@ function IsUserLoggedin(WrappedComponent) {
       this.props = props;
     }
     componentDidMount() {
-      let winId = get(KeyVars.WINID);
+      let auth = get(KeyVars.AUTH);
       let isAdmin = get(KeyVars.ISADMIN) === "true" ? true : false;
       let redirectURL = "";
-      if (winId) {
+      if (auth) {
+        ///Make an API call to validate token
         redirectURL = "/userdashboard";
         if (isAdmin) redirectURL = "/admindashboard";
         this.props.history.push(redirectURL);

@@ -10,6 +10,7 @@ import {
   Grid,
   Paper
 } from "@material-ui/core";
+import Graph from "../../Component/Graph/Index";
 
 class Domains extends Component {
   constructor(props) {
@@ -48,8 +49,8 @@ class Domains extends Component {
   render() {
     let { domains } = this.state;
     return (
-      <Grid container spacing={2} style={Styles.container}>
-        <Grid item xs={4}>
+      <Grid container spacing={6} style={Styles.container}>
+        <Grid item xs={3}>
           {domains.map((domain, indx) => (
             <Accordion key={`${domain.name}-${indx}`}>
               <AccordionSummary
@@ -66,7 +67,7 @@ class Domains extends Component {
                 <Grid
                   container
                   direction='column'
-                  spacing={1}
+                  spacing={2}
                   justify='flex-start'
                 >
                   {domain.modules &&
@@ -82,7 +83,9 @@ class Domains extends Component {
             </Accordion>
           ))}
         </Grid>
-        <Grid item xs={7}></Grid>
+        <Grid item xs={8}>
+          <Graph type={2} />
+        </Grid>
       </Grid>
     );
   }

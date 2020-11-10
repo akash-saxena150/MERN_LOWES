@@ -30,6 +30,8 @@ class Header extends Component {
   logout = () => {
     remove(KeyVars.WINID);
     remove(KeyVars.ISADMIN);
+    remove(KeyVars.AUTH);
+    remove(KeyVars.FNAME);
     this.setState({ fName: null });
     this.props.history.push("/");
   };

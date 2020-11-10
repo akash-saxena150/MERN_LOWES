@@ -1,5 +1,6 @@
 {
   "ISADMIN": "loggedInUserIsAdmin",
   "WINID": "loggedInUserWinId",
-  "FNAME": "userFName"
+  "FNAME": "userFName",
+  "AUTH": "auth"
 }
