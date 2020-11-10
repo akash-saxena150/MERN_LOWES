@@ -36,5 +36,5 @@ export default {
     singleSeries: [{}],
     multiSeries: [{ seriesname: "", data: [] }]
   },
-  categories: [{ category: [{ labels: "" }] }]
+  categories: [{ category: [{ label: "" }] }]
 };

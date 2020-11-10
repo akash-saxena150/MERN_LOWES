@@ -5,7 +5,12 @@ import RenderCustomField from "./RenderCustomField";
 class FormGenerator extends Component {
   constructor(props) {
     super(props);
+    console.log("In form --->", props.formObj);
     this.state = { formObj: [...props.formObj], formError: false };
+  }
+  componentDidUpdate(prevProps) {
+    if (!(prevProps === this.props))
+      this.setState({ formObj: this.props.formObj });
   }
   styles = {
     loginForm: { width: "100%" }
