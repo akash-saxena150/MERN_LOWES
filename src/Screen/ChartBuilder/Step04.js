@@ -5,13 +5,30 @@ import {
   Paper,
   AccordionSummary,
   Accordion,
-  AccordionDetails
+  AccordionDetails,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider
 } from "@material-ui/core";
 import { callAPI, colors } from "../../service";
+import Graph from "../../Component/Graph/Index";
 class Step04 extends Component {
-  constructor() {
-    super();
-    this.state = { tables: [] };
+  constructor(props) {
+    super(props);
+    this.template = "select <<SELECTION>> from <<TABLE>> where <<CONDITION>>";
+    console.log("Chart data --->", props.chartData);
+    this.state = {
+      tables: [],
+      currOp: null,
+      enableSelection: false,
+      enableCondition: false,
+      selection: "",
+      condition: "",
+      template: this.template
+    };
   }
   componentDidMount() {
     callAPI("tables", "get", this.onTablesLoad, this.onTablesLoadErr);
@@ -40,11 +57,46 @@ class Step04 extends Component {
     tempState[indx].columns = [...data.data.rows];
     this.setState({ domains: tempState });
   };
+  populateValue = (column, table) => {
+    if (this.state.enableSelection) {
+      if (column.data_type.toLowerCase() === "int64") {
+        this.setState({ selection: column.column_name });
+        let tempStr = this.template;
+        tempStr = tempStr
+          .replace("<<SELECTION>>", column.column_name)
+          .replace("<<TABLE>>", table.table_name);
+        console.log("Template string --->", tempStr);
+        this.setState({ template: tempStr });
+      }
+    }
+  };
+  checkColActive(column) {
+    const { enableSelection, enableCondition } = this.state;
+    return (
+      (enableSelection && column.data_type.toLowerCase() === "int64") ||
+      enableCondition
+    );
+  }
+  setSelection(type) {
+    if (type === "selection") {
+      this.setState({ enableSelection: true, enableCondition: false });
+    }
+    if (type === "condition") {
+      this.setState({ enableSelection: false, enableCondition: true });
+    }
+  }
   render() {
-    let { tables } = this.state;
+    let {
+      tables,
+      currOp,
+      enableSelection,
+      enableCondition,
+      selection,
+      template
+    } = this.state;
     let { Styles } = this.props;
     return (
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         <Grid item xs={3}>
           {tables &&
             tables.map((table, indx) => (
@@ -71,7 +123,18 @@ class Step04 extends Component {
                     {table.columns &&
                       table.columns.map((column, i) => (
                         <Grid item key={`${column.column_name}-${i}`}>
-                          <Paper elevation={1} style={Styles.column}>
+                          <Paper
+                            elevation={1}
+                            style={{
+                              ...Styles.column,
+                              ...{
+                                border: this.checkColActive(column)
+                                  ? "2px solid #ccc"
+                                  : ""
+                              }
+                            }}
+                            onClick={() => this.populateValue(column, table)}
+                          >
                             <Grid container justify='space-between'>
                               <Grid item>
                                 <Typography>{column.column_name}</Typography>
@@ -90,7 +153,86 @@ class Step04 extends Component {
               </Accordion>
             ))}
         </Grid>
-        <Grid item xs={8}></Grid>
+        <Grid item xs={6} container direction='column' spacing={4}>
+          <Grid item>
+            <Graph />
+          </Grid>
+          <Grid item>
+            <Typography>
+              <strong>Query:</strong>
+            </Typography>
+            <Divider variant='middle' />
+          </Grid>
+          <Grid item>{template}</Grid>
+        </Grid>
+        <Grid
+          item
+          xs={3}
+          spacing={2}
+          container
+          direction='column'
+          style={{ background: "#f1f1f1" }}
+        >
+          <Grid item>
+            <Typography variant='subtitle1'>Select</Typography>
+          </Grid>
+          <Grid item>
+            <TextField
+              id='outlined-basic'
+              label='Var'
+              value={selection}
+              variant='outlined'
+              onClick={() => {
+                this.setSelection("selection");
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant='subtitle1'>Where</Typography>
+          </Grid>
+          <Grid item container direction='column' spacing={2}>
+            <Grid item>
+              <TextField
+                id='outlined-basic'
+                label='Var'
+                variant='outlined'
+                onClick={() => {
+                  this.setSelection("condition");
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <FormControl variant='outlined'>
+                <InputLabel id='demo-simple-select-outlined-label'>
+                  Ops
+                </InputLabel>
+                <Select
+                  labelId='demo-simple-select-outlined-label'
+                  id='demo-simple-select-outlined'
+                  value={currOp}
+                  onChange={e => {
+                    this.setState({ currOp: e.target.value });
+                  }}
+                  label='Ops'
+                >
+                  <MenuItem value=''>
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={">"}>></MenuItem>
+                  <MenuItem value={">="}>>=</MenuItem>
+                  <MenuItem value={"<="}>{"<="}</MenuItem>
+                  <MenuItem value={"<"}>{"<"}</MenuItem>
+                  <MenuItem value={"="}>{"="}</MenuItem>
+                  <MenuItem value={"NOT IN"}>{"NOT IN"}</MenuItem>
+                  <MenuItem value={"NOT NULL"}>{"NOT NULL"}</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <TextField id='outlined-basic' label='value' variant='outlined' />
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     );
   }

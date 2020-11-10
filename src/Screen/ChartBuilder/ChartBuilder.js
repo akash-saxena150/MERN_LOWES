@@ -75,6 +75,7 @@ class ChartBuilder extends Component {
         {actualStep === 4 && (
           <Step04
             chartSchema={ChartSchema}
+            chartData={this.chartData}
             modifySchema={this.modifySchema}
             Styles={Styles}
           />
